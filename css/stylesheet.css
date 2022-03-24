@@ -2,6 +2,11 @@
   border: 2px orange solid;
 }
 
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+}
+
 #page_title {
   border: 2px green solid;
 }
@@ -23,4 +28,10 @@ p {
 
 #subtitle {
   font-style: italic;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  position: relative;
 }

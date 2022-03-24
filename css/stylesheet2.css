@@ -1,28 +1,28 @@
 .carousel_item_description {
-    border: 2px orange solid;
-  }
-  
-  #page_title {
-    border: 2px green solid;
-  }
-  
-  #page_title h2,
-  p {
-    border: 2px purple solid;
-  }
-  
-  #myCarousel {
-    border: 2px red solid;
-    height: 500px;
-    width: 100%;
-  }
+  border: 2px orange solid;
+}
 
-  #about {
-    border: 2px blue solid;
-    height: 500px;
-    width: 100%;
-  }
-  
-  #subtitle {
-    font-style: italic;
-  }
+#page_title {
+  border: 2px green solid;
+}
+
+#page_title h2,
+p {
+  border: 2px purple solid;
+}
+
+#myCarousel {
+  border: 2px red solid;
+  height: 500px;
+  width: 100%;
+}
+
+#about {
+  border: 2px blue solid;
+  height: 500px;
+  width: 100%;
+}
+
+#subtitle {
+  font-style: italic;
+}
