@@ -1,7 +1,3 @@
-.carousel_item_description {
-  border: 2px orange solid;
-}
-
 #page_title {
   border: 2px green solid;
 }
@@ -11,7 +7,13 @@ p {
   border: 2px purple solid;
 }
 
+#subtitle {
+  font-style: italic;
+}
+
 #map_container {
+  width: 100%;
+  height: 500px;
   border: 2px red solid;
 }
 
@@ -19,8 +21,4 @@ p {
   border: 2px blue solid;
   height: 500px;
   width: 100%;
-}
-
-#subtitle {
-  font-style: italic;
 }
