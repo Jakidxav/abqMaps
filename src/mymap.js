@@ -2,20 +2,20 @@
 
 window.onload = function () {
   //https://leafletjs.com/SlavaUkraini/examples/layers-control/
-  var citiesLayer = L.layerGroup();
+  var placesLayer = L.layerGroup();
 
   var biopark = L.marker([35.10234795549811, -106.68069662766312])
     .bindPopup("BioPark")
-    .addTo(citiesLayer);
+    .addTo(placesLayer);
   var hospital = L.marker([35.09086260154882, -106.60443253827218])
     .bindPopup("UNM Hospital")
-    .addTo(citiesLayer);
+    .addTo(placesLayer);
   var sunport = L.marker([35.04764947336518, -106.6121846572487])
     .bindPopup("Sunport")
-    .addTo(citiesLayer);
+    .addTo(placesLayer);
   var riogrande = L.marker([35.13576626999782, -106.6964103825461])
     .bindPopup("Rio Grande Nature Center")
-    .addTo(citiesLayer);
+    .addTo(placesLayer);
 
   // set Leaflet style for city limits polygon
   var styleCityLimits = {
@@ -61,6 +61,13 @@ window.onload = function () {
     maxZoom: 18,
   });
 
+  /*
+  var img1895 = L.tileLayer('../media/map_tiles/{z}/{x}/{y}.jpg', {
+    attribution: 'Georeferenced image',
+    tms:true
+  }).addTo(map);
+  */
+ 
   // create map container, add basemap
   var map = L.map("map_container", {
     center: [39.73, -104.99], //[35.08770657898809, -106.65591268675824]
@@ -68,21 +75,22 @@ window.onload = function () {
     layers: [streets, grayscale],
   }).setView([35.08770657898809, -106.65591268675824], 11);
 
-  /*
   var baseMaps = {
     Streets: streets,
     Grayscale: grayscale,
   };
-  */
 
+  /*
   var baseMaps = {
     "<span style='color: gray'>Grayscale</span>": grayscale,
     Streets: streets,
   };
+  */
 
   var overlayMaps = {
-    "Cities": citiesLayer,
+    "Places": placesLayer,
     "City Limits": cityLimits,
+    //"1985": img1895,
   };
 
   var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
