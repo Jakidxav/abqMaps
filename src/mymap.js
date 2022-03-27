@@ -1,28 +1,47 @@
 "use strict"; // JS strict mode
 
 window.onload = function () {
-  //https://leafletjs.com/SlavaUkraini/examples/layers-control/
-  var placesLayer = L.layerGroup();
-
-  var biopark = L.marker([35.10234795549811, -106.68069662766312])
-    .bindPopup("BioPark")
-    .addTo(placesLayer);
-  var hospital = L.marker([35.09086260154882, -106.60443253827218])
-    .bindPopup("UNM Hospital")
-    .addTo(placesLayer);
-  var sunport = L.marker([35.04764947336518, -106.6121846572487])
-    .bindPopup("Sunport")
-    .addTo(placesLayer);
-  var riogrande = L.marker([35.13576626999782, -106.6964103825461])
-    .bindPopup("Rio Grande Nature Center")
-    .addTo(placesLayer);
-
-  // set Leaflet style for city limits polygon
+  // set leaflet style for point and polygon data
   var styleCityLimits = {
     fillOpacity: 0,
     weight: 1,
     opacity: 1,
     color: "#000000",
+  };
+
+  var styleBikeTrails = {
+    fillOpacity: 0,
+    weight: 1,
+    opacity: 1,
+    color: "#B73239",
+  };
+
+  var styleCityParks = {
+    fillOpacity: 0.5,
+    weight: 1,
+    opacity: 1,
+    color: "#009A17",
+  };
+
+  var styleOpenSpaces = {
+    fillOpacity: 0.5,
+    weight: 1,
+    opacity: 1,
+    color: "#8031A7",
+  };
+
+  var styleCityTrails = {
+    fillOpacity: 0.5,
+    weight: 1,
+    opacity: 1,
+    color: "#Ab784E",
+  };
+
+  var styleHistoricPlaces = {
+    fillOpacity: 0.5,
+    weight: 1,
+    opacity: 1,
+    color: "#FFB81C",
   };
 
   /*
@@ -36,11 +55,60 @@ window.onload = function () {
   }
   */
 
+  //https://leafletjs.com/SlavaUkraini/examples/layers-control/
+  // define point and polygon data here
+  var placesLayer = L.layerGroup();
+  var biopark = L.marker([35.10234795549811, -106.68069662766312])
+    .bindPopup("BioPark")
+    .addTo(placesLayer);
+  var hospital = L.marker([35.09086260154882, -106.60443253827218])
+    .bindPopup("UNM Hospital")
+    .addTo(placesLayer);
+  var sunport = L.marker([35.04764947336518, -106.6121846572487])
+    .bindPopup("Sunport")
+    .addTo(placesLayer);
+  var riogrande = L.marker([35.13576626999782, -106.6964103825461])
+    .bindPopup("Rio Grande Nature Center")
+    .addTo(placesLayer);
+
   var cityLimits = L.geoJSON(citylimits, {
     //onEachFeature: cityLimitsPopups,
     style: styleCityLimits,
   });
 
+  var bikeTrails = L.geoJSON(biketrails, {
+    style: styleBikeTrails,
+  });
+
+  var cityParks = L.geoJSON(cityparks, {
+    style: styleCityParks,
+  });
+
+  var openSpaces = L.geoJSON(openspaces, {
+    style: styleOpenSpaces,
+  });
+
+  var cityTrails = L.geoJSON(citytrails, {
+    style: styleCityTrails,
+  });
+
+  var historicPlaces = L.geoJSON(historicplaces, {
+    style: styleHistoricPlaces,
+  });
+
+  var overlayMaps = {
+    "Places": placesLayer,
+    "City Limits": cityLimits,
+    "Bike Trails": bikeTrails,
+    "Parks": cityParks,
+    "Open Spaces": openSpaces,
+    "Trails": cityTrails,
+    "Historic Places": historicPlaces,
+    //"1985": img1895,
+  };
+
+
+  // define basemaps here
   var basemapAttribution =
     'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
   var basemapURL =
@@ -61,13 +129,14 @@ window.onload = function () {
     maxZoom: 18,
   });
 
+
   /*
   var img1895 = L.tileLayer('../media/map_tiles/{z}/{x}/{y}.jpg', {
     attribution: 'Georeferenced image',
     tms:true
   }).addTo(map);
   */
- 
+
   // create map container, add basemap
   var map = L.map("map_container", {
     center: [39.73, -104.99], //[35.08770657898809, -106.65591268675824]
@@ -87,11 +156,12 @@ window.onload = function () {
   };
   */
 
-  var overlayMaps = {
-    "Places": placesLayer,
-    "City Limits": cityLimits,
-    //"1985": img1895,
-  };
-
+  // combine basemaps and map overlays
   var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+  console.log("map loaded")
+  console.log(map.getBounds());
+  map.on('moveend', function() { 
+    console.log(map.getBounds());
+  });
 };
