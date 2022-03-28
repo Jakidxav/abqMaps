@@ -44,17 +44,6 @@ window.onload = function () {
     color: "#FFB81C",
   };
 
-  /*
-  // function to set tooltip popup for city limits
-  function cityLimitsPopups(feature, layer) {
-    // adds popup when you click on a field system boundary
-    var cityLimitsValue = "<b>City limits:</b> " + feature.properties.System;
-    if (feature.properties && feature.properties.System) {
-      layer.bindPopup(cityLimitsValue);
-    }
-  }
-  */
-
   //https://leafletjs.com/SlavaUkraini/examples/layers-control/
   // define point and polygon data here
   var placesLayer = L.layerGroup();
@@ -74,7 +63,7 @@ window.onload = function () {
   var cityLimits = L.geoJSON(citylimits, {
     //onEachFeature: cityLimitsPopups,
     style: styleCityLimits,
-  });
+  }).bindPopup(chart);
 
   var bikeTrails = L.geoJSON(biketrails, {
     style: styleBikeTrails,
@@ -104,7 +93,6 @@ window.onload = function () {
     "Open Spaces": openSpaces,
     "Trails": cityTrails,
     "Historic Places": historicPlaces,
-    //"1985": img1895,
   };
 
 
@@ -121,6 +109,7 @@ window.onload = function () {
     zoomOffset: -1,
     maxZoom: 18,
   });
+
   var streets = L.tileLayer(basemapURL, {
     id: "mapbox/streets-v11",
     attribution: basemapAttribution,
@@ -129,24 +118,43 @@ window.onload = function () {
     maxZoom: 18,
   });
 
+  //at http://leaflet-extras.github.io/leaflet-providers/preview/
+  var USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 20,
+    attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+  });
 
   /*
-  var img1895 = L.tileLayer('../media/map_tiles/{z}/{x}/{y}.jpg', {
-    attribution: 'Georeferenced image',
-    tms:true
-  }).addTo(map);
+  var topoBasemapURL = 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}';
+  var topoBasemapAtrribution = 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>';
+  var USGS_USImageryTopo = L.tileLayer(topoBaseMapURL, {
+	attribution: topoBaseMapAttribution,
+  tileSize: 512,
+  zoomOffset: -1,
+  maxZoom: 18,
+  });
+  */
+  
+  // try with georeferenced file
+  /*
+  var georeference = L.tileLayer('../media/Georeferenced/{z}/{x}/{y}.jpg', {
+    attribution: 'Map data',
+    tsm:true
+  });
   */
 
   // create map container, add basemap
   var map = L.map("map_container", {
     center: [39.73, -104.99], //[35.08770657898809, -106.65591268675824]
     zoom: 11,
-    layers: [streets, grayscale],
+    layers: [streets, grayscale, USGS_USImagery],
   }).setView([35.08770657898809, -106.65591268675824], 11);
 
   var baseMaps = {
     Streets: streets,
     Grayscale: grayscale,
+    Topography: USGS_USImagery,
+    //Topography: USGS_USImageryTopo,
   };
 
   /*
@@ -155,13 +163,116 @@ window.onload = function () {
     Streets: streets,
   };
   */
-
+  /*
+  // static jpg
+  var imageUrl = '../media/Georeferenced/ABQ_1985_GE_Georef.jpg',
+  imageBounds = [
+    [35.22711145535215, -106.3634490966797], 
+    [34.94842790637081, -106.94778442382812]
+  ];
+  var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+  */
   // combine basemaps and map overlays
   var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+  /*
+  var svg = d3.select("population-button")
+  .on("click", chart);
+  */
 
   console.log("map loaded")
   console.log(map.getBounds());
   map.on('moveend', function() { 
     console.log(map.getBounds());
   });
+
+
+  // begin D3 chart code
+  function chart(d) {
+    var feature = d.feature;
+    var data = feature.properties.popData;
+    var width = 300;
+    var height = 100;
+    var margin = { left: 25, right: 10, top: 40, bottom: 40 };
+
+    var div = d3.create("div");
+    var svg = div
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom);
+    var g = svg
+      .append("g")
+      .attr("transform", "translate(" + [margin.left, margin.top] + ")");
+
+    const populationMinMax = d3.extent(data, (d) => d);
+    var y = d3.scaleLinear().range([height, 0]).domain(populationMinMax);
+    var yAxis = d3
+      .axisLeft()
+      .ticks(4)
+      .scale(y)
+      .tickFormat(function (d) {
+        return parseFloat(d) / 1000;
+      });
+    g.append("g").call(yAxis);
+
+    var x = d3.scaleBand().domain(d3.range(4)).range([0, width -10]);
+    var xAxis = d3
+      .axisBottom()
+      .scale(x)
+      .tickFormat(function(d) {
+        return d * 10 + 1990;
+      });
+
+    g.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")
+      .attr("text-anchor", "end")
+      .attr("transform", "rotate(-90)translate(-12,-15)");
+
+    var rects = g
+      .selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("y", height)
+      .attr("height", 0)
+      .attr("width", x.bandwidth() - 10)
+      .attr("x", function (d, i) {
+        return x(i);
+      })
+      .attr("fill", "steelblue")
+      .transition()
+      .attr("height", function (d) {
+        return height - y(d);
+      })
+      .attr("y", function (d) {
+        return y(d);
+      })
+      .duration(1000);
+
+    var title = svg
+      .append("text")
+      .style("font-size", "14px")
+      .text(feature.properties.title)
+      .attr("x", width / 2 + margin.left)
+      .attr("y", 30)
+      .attr("text-anchor", "middle");
+
+    return div.node();
+  }
 };
+/*
+var map = L.map('image-map', {
+		minZoom: 16,
+		maxZoom: 18,
+		}).setView([46.975768, 7.436308], 17);
+
+
+var imageUrl = '../Bilder/Karten/Normalansicht.png',
+    imageBounds = [[46.966635, 7.415942], [46.998849, 7.470108]];
+
+L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+map.setMaxBounds(imageBounds);
+*/

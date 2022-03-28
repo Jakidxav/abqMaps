@@ -8,6 +8,9 @@ var citylimits = {
       "properties": {
         "Name": "ALBUQUERQUE",
         "description": "null",
+        "title": "Population Through Time (1000s of people)",
+        "popData": [386988, 448607, 545852, 564559],
+        "popTime": [1990, 2000, 2010, 2020],
         "altitudeMode": "clampToGround",
         "Field_1": "ALBUQUERQUE",
         "Shape.STArea()": "5274031980.307129",
