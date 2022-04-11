@@ -22,6 +22,16 @@ window.onload = function () {
         maxZoom: 18,
     }).addTo(map);
 
+    //at http://leaflet-extras.github.io/leaflet-providers/preview/
+    var usgs_topo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 20,
+        attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+    }).addTo(map);
+
+    // add split control to map here using split-map plugin
+    L.control.splitMap(streets, usgs_topo).addTo(map);
+
+    // add printing function to map here using easyPrint plugin
     var printer = L.easyPrint({
         tileLayer: streets,
         sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
@@ -29,12 +39,4 @@ window.onload = function () {
         exportOnly: true,
         hideControlContainer: true
     }).addTo(map);
-
-    /*
-    console.log("map loaded")
-    console.log(map.getBounds());
-    map.on('moveend', function () {
-        console.log(map.getBounds());
-    });
-    */
 };

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Get to Know Albuquerque</title>
+    <title>ABQMapMaker</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -34,14 +34,26 @@
     ></script>
     <!-- Easy Print for Leaflet: https://github.com/rowanwins/leaflet-easyPrint -->
     <script src="../scripts/easyPrint.js"></script>
+    <!-- Splitmap plugin for Leaflet: https://github.com/QuantStack/leaflet-splitmap -->
+    <script src="../scripts/leafletSplitMap.js"></script>
+    <!-- personal map javascript file -->
     <script src="../scripts/map_split.js"></script>
+    <script src="../scripts/imageComparison.js"></script>
   </head>
 
   <body>
     <!-- example from https://getbootstrap.com/docs/5.0/components/navbar/ -->
     <nav class="container navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -57,28 +69,43 @@
 
     <div id="page_title" class="container">
       <div class="row">
-        <h2 class="col-sm-12">Get to Know Albuquerque</h2>
+        <h2 class="col-sm-12">ABQ Map Maker</h2>
         <p id="subtitle" class="col-sm-12">
-          Visualizing interesting and useful information for Albuquerque, New Mexico
+          Visualizing useful data for social and environmental justice work in
+          Albuquerque, New Mexico
+        </p>
+        <h3 class="col-sm-12">How to use this map</h3>
+        <p class="col-sm-12">
+          This map lets you compare two basemaps to each other, or a basemap
+          with a satellite image.
         </p>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
-        <!--  Reference: https://www.w3schools.com/bootstrap/bootstrap_carousel.asp -->
-        <div id="map_slider_container" class="col-sm-12, col-lg-9"></div>
+        <!-- map slider div -->
+        <div id="map_slider_container" class="map-container col-sm-12"></div>
+      </div>
+    </div>
 
-        <div id="about" class="col-sm-12 col-lg-3">
-          <h3>How to use this map</h3>
-          <p>...</p>
-
-          <h4>Data sources</h4>
-          <p>...</p>
-          <h4>Code references</h4>
-          <p>...</p>
+    <div class="container">
+      <div class="row">
+        <!-- image slider div -->
+        <!-- https://www.w3schools.com/howto/howto_js_image_comparison.asp -->
+        <div class="img-comp-container col-sm-12">
+          <div class="img-comp-img">
+            <img src="../media/ABQ_1985_GE.jpg" />
+          </div>
+          <div class="img-comp-img img-comp-overlay">
+            <img src="../media/ABQ_2020_GE.jpg" />
+          </div>
+          
         </div>
       </div>
     </div>
+    <script>
+      initComparisons();
+    </script>
   </body>
 </html>

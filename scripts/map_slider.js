@@ -22,6 +22,26 @@ window.onload = function () {
         maxZoom: 18,
     }).addTo(map);
 
+    var slider = document.getElementById("backgroundImageSlider");
+    var output = document.getElementById("sliderDisplay");
+    output.innerHTML = "Albuquerque in " + slider.value; // Display the default slider value
+
+    var imageUrl = `../media/ABQ_${slider.value}_GE.jpg`;
+    var imageBounds = [
+            [35.22711145535215, -106.32774353027345],
+            [34.94842790637081, -106.9841766357422]
+        ];
+    var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = "Albuquerque in " + this.value;
+        var imageUrl = `../media/ABQ_${this.value}_GE.jpg`;
+        var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+        console.log(imageUrl)
+    }
+
+    // add printing function to map here using easyPrint plugin
     var printer = L.easyPrint({
         tileLayer: streets,
         sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
@@ -30,11 +50,12 @@ window.onload = function () {
         hideControlContainer: true
     }).addTo(map);
 
+    // add lat/lon printouts in console, for debugging
     /*
-    console.log("map loaded")
+  console.log("map loaded")
+  console.log(map.getBounds());
+  map.on('moveend', function () {
     console.log(map.getBounds());
-    map.on('moveend', function () {
-        console.log(map.getBounds());
-    });
-    */
+  });
+  */
 };

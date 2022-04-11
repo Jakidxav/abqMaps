@@ -126,62 +126,28 @@ window.onload = function () {
   });
 
   //at http://leaflet-extras.github.io/leaflet-providers/preview/
-  var USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+  var usgs_topo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 20,
     attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
   });
-
-  /*
-  var topoBasemapURL = 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}';
-  var topoBasemapAtrribution = 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>';
-  var USGS_USImageryTopo = L.tileLayer(topoBaseMapURL, {
-  attribution: topoBaseMapAttribution,
-  tileSize: 512,
-  zoomOffset: -1,
-  maxZoom: 18,
-  });
-  */
-
-  // try with georeferenced file
-  /*
-  var georeference = L.tileLayer('../media/Georeferenced/{z}/{x}/{y}.jpg', {
-    attribution: 'Map data',
-    tsm:true
-  });
-  */
 
   // create map container, add basemap
   var map = L.map("map_overlay_container", {
     center: [39.73, -104.99], //[35.08770657898809, -106.65591268675824]
     zoom: 11,
-    layers: [streets, grayscale, USGS_USImagery],
+    layers: [streets, grayscale, usgs_topo],
   }).setView([35.08770657898809, -106.65591268675824], 11);
 
   var baseMaps = {
     Streets: streets,
     Grayscale: grayscale,
-    Topography: USGS_USImagery,
-    //Topography: USGS_USImageryTopo,
+    Topography: usgs_topo,
   };
 
-  /*
-  var baseMaps = {
-    "<span style='color: gray'>Grayscale</span>": grayscale,
-    Streets: streets,
-  };
-  */
-  /*
-  // static jpg
-  var imageUrl = '../media/Georeferenced/ABQ_1985_GE_Georef.jpg',
-  imageBounds = [
-    [35.22711145535215, -106.3634490966797], 
-    [34.94842790637081, -106.94778442382812]
-  ];
-  var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
-  */
   // combine basemaps and map overlays
   var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
+  // add printing function to map here using easyPrint plugin
   var printer = L.easyPrint({
     // i think adding one baselayer will work for every basemap
     tileLayer: streets,
@@ -191,6 +157,7 @@ window.onload = function () {
     hideControlContainer: true
   }).addTo(map);
 
+  // add lat/lon printouts in console, for debugging
   console.log("map loaded")
   console.log(map.getBounds());
   map.on('moveend', function () {
@@ -273,17 +240,3 @@ window.onload = function () {
     return div.node();
   }
 };
-/*
-var map = L.map('image-map', {
-    minZoom: 16,
-    maxZoom: 18,
-    }).setView([46.975768, 7.436308], 17);
-
-
-var imageUrl = '../Bilder/Karten/Normalansicht.png',
-    imageBounds = [[46.966635, 7.415942], [46.998849, 7.470108]];
-
-L.imageOverlay(imageUrl, imageBounds).addTo(map);
-
-map.setMaxBounds(imageBounds);
-*/

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Get to Know Albuquerque</title>
+    <title>ABQMapMaker</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -32,8 +32,9 @@
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin=""
     ></script>
-    <!-- Easy Print for Leaflet: https://github.com/rowanwins/leaflet-easyPrint -->
+    <!-- Easy Print plugin for Leaflet: https://github.com/rowanwins/leaflet-easyPrint -->
     <script src="../scripts/easyPrint.js"></script>
+    <!-- personal map javascript file -->
     <script src="../scripts/map_slider.js"></script>
   </head>
 
@@ -57,26 +58,25 @@
 
     <div id="page_title" class="container">
       <div class="row">
-        <h2 class="col-sm-12">Get to Know Albuquerque</h2>
+        <h2 class="col-sm-12">ABQ Map Maker</h2>
         <p id="subtitle" class="col-sm-12">
-          Visualizing interesting and useful information for Albuquerque, New Mexico
+          Visualizing useful data for social and environmental justice work in Albuquerque, New Mexico
         </p>
+        <h3 class="col-sm-12">How to use this map</h3>
+        <p class="col-sm-12">...</p>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
-        <!--  Reference: https://www.w3schools.com/bootstrap/bootstrap_carousel.asp -->
-        <div id="map_slider_container" class="col-sm-12, col-lg-9"></div>
-
-        <div id="about" class="col-sm-12 col-lg-3">
-          <h3>How to use this map</h3>
-          <p>...</p>
-
-          <h4>Data sources</h4>
-          <p>...</p>
-          <h4>Code references</h4>
-          <p>...</p>
+        <div id="map_slider_container" class="map-container col-sm-12"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="slidecontainer col-sm-12 col-lg-8 offset-lg-2">
+          <input type="range" min="1985" max="2020" value="1985" step="5" class="slider" id="backgroundImageSlider">
+          <p id="sliderDisplay"></p>
         </div>
       </div>
     </div>

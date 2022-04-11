@@ -1,29 +1,107 @@
-#page_title {
-  border: 2px green solid;
-  padding-top: 2%;
+body {
+  background-color: #f0dddd;
 }
 
-#page_title h2,
-p {
-  /* border: 2px purple solid; */
+#page_title {
+  padding-top: 2%;
 }
 
 #subtitle {
   font-style: italic;
 }
 
-#map_overlay_container, #map_slider_container, #map_split_container {
-  border: 2px black solid;
-  width: 100%;
-  height: 500px;
-}
-
 #about {
   border: 2px black solid;
-  height: 500px;
   width: 100%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-bottom: 4%;
 }
 
-body {
-  background-color: #f0dddd;
+#about h3 {
+  text-decoration: underline;
+}
+
+#about h4 {
+  font-style: italic;
+}
+
+.map-container, .img-comp-img {
+  border: 2px black solid;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 4%;
+}
+
+.img-comp-container {
+  height: 500px; /*should be the same height as the images*/
+  margin-bottom: 4%;
+  border: 2px solid yellow;
+}
+
+.img-comp-img {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  border: 2px solid white;
+  opacity: 0.7;
+  border-radius: 50%;
+  margin-left: 14px;
+}
+
+
+/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* the slider itself */
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #343a40; /* bootstrap dark gray color */
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #343a40; /* bootstrap dark gray color */
+  cursor: pointer;
+}
+
+#sliderDisplay {
+  margin-top: 2%;
 }
