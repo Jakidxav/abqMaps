@@ -147,6 +147,9 @@ window.onload = function () {
   // combine basemaps and map overlays
   var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
+  // add scale bar to map
+  L.control.scale().addTo(map);
+  
   // add printing function to map here using easyPrint plugin
   var printer = L.easyPrint({
     // i think adding one baselayer will work for every basemap
@@ -157,12 +160,6 @@ window.onload = function () {
     hideControlContainer: true
   }).addTo(map);
 
-  // add lat/lon printouts in console, for debugging
-  console.log("map loaded")
-  console.log(map.getBounds());
-  map.on('moveend', function () {
-    console.log(map.getBounds());
-  });
 
 
   // begin D3 chart code
