@@ -28,8 +28,10 @@ window.onload = function () {
 
     var imageUrl = `../media/ABQ_${slider.value}_GE.jpg`;
     var imageBounds = [
-            [35.22711145535215, -106.32774353027345],
-            [34.94842790637081, -106.9841766357422]
+            [35.2833338, -106.2363219],
+            [34.8873773, -107.0528981]
+            // [35.22711145535215, -106.32774353027345], These are the values that were in originally before Luke changed it. Feel free to delete.
+            // [34.94842790637081, -106.9841766357422]
         ];
     var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
