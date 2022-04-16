@@ -33,6 +33,8 @@ window.onload = function () {
         ];
     var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
+
+
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
         output.innerHTML = "Albuquerque in " + this.value;
