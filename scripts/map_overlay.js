@@ -13,7 +13,7 @@ window.onload = function () {
   var cityLimits = L.geoJSON(citylimits, {
     //onEachFeature: cityLimitsPopups,
     style: styleCityLimits,
-  }).bindPopup(chart);
+  });
 
   // bike trail data
   var styleBikeTrails = {
@@ -78,16 +78,16 @@ window.onload = function () {
   //https://leafletjs.com/SlavaUkraini/examples/layers-control/
   // define point data here
   var placesLayer = L.layerGroup();
-  var biopark = L.marker([35.10234795549811, -106.68069662766312])
+  var biopark = L.marker([35.07960233987897, -106.6626523247024])
     .bindPopup("BioPark")
     .addTo(placesLayer);
-  var hospital = L.marker([35.09086260154882, -106.60443253827218])
+  var hospital = L.marker([35.089124664249965, -106.61840612465896])
     .bindPopup("UNM Hospital")
     .addTo(placesLayer);
   var sunport = L.marker([35.04764947336518, -106.6121846572487])
     .bindPopup("Sunport")
     .addTo(placesLayer);
-  var riogrande = L.marker([35.13576626999782, -106.6964103825461])
+  var riogrande = L.marker([35.130659544765976, -106.6828237445549])
     .bindPopup("Rio Grande Nature Center")
     .addTo(placesLayer);
 
@@ -159,81 +159,4 @@ window.onload = function () {
     exportOnly: true,
     hideControlContainer: true
   }).addTo(map);
-
-
-
-  // begin D3 chart code
-  function chart(d) {
-    var feature = d.feature;
-    var data = feature.properties.popData;
-    var width = 300;
-    var height = 100;
-    var margin = { left: 25, right: 10, top: 40, bottom: 40 };
-
-    var div = d3.create("div");
-    var svg = div
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom);
-    var g = svg
-      .append("g")
-      .attr("transform", "translate(" + [margin.left, margin.top] + ")");
-
-    const populationMinMax = d3.extent(data, (d) => d);
-    var y = d3.scaleLinear().range([height, 0]).domain(populationMinMax);
-    var yAxis = d3
-      .axisLeft()
-      .ticks(4)
-      .scale(y)
-      .tickFormat(function (d) {
-        return parseFloat(d) / 1000;
-      });
-    g.append("g").call(yAxis);
-
-    var x = d3.scaleBand().domain(d3.range(4)).range([0, width - 10]);
-    var xAxis = d3
-      .axisBottom()
-      .scale(x)
-      .tickFormat(function (d) {
-        return d * 10 + 1990;
-      });
-
-    g.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-      .selectAll("text")
-      .attr("text-anchor", "end")
-      .attr("transform", "rotate(-90)translate(-12,-15)");
-
-    var rects = g
-      .selectAll("rect")
-      .data(data)
-      .enter()
-      .append("rect")
-      .attr("y", height)
-      .attr("height", 0)
-      .attr("width", x.bandwidth() - 10)
-      .attr("x", function (d, i) {
-        return x(i);
-      })
-      .attr("fill", "steelblue")
-      .transition()
-      .attr("height", function (d) {
-        return height - y(d);
-      })
-      .attr("y", function (d) {
-        return y(d);
-      })
-      .duration(1000);
-
-    var title = svg
-      .append("text")
-      .style("font-size", "14px")
-      .text(feature.properties.title)
-      .attr("x", width / 2 + margin.left)
-      .attr("y", 30)
-      .attr("text-anchor", "middle");
-
-    return div.node();
-  }
 };

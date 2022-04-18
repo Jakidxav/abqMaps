@@ -63,6 +63,11 @@ body {
 /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
 .slidecontainer {
   width: 100%; /* Width of the outside container */
+  margin-bottom: 4%;
+}
+
+#backgroundImageSlider {
+  margin-bottom: 2%;
 }
 
 /* the slider itself */

@@ -22,9 +22,23 @@ window.onload = function () {
         maxZoom: 18,
     }).addTo(map);
 
+    // begin slider logic here
+    // this array is for the census population data
+    var abqPopulation = {
+        "1990": 386988,
+        "2000": 448607,
+        "2010": 545852,
+        "2020": 564559
+    }
+
+    // access slider and two <p> tags that change with the slider
     var slider = document.getElementById("backgroundImageSlider");
-    var output = document.getElementById("sliderDisplay");
-    output.innerHTML = "Albuquerque in " + slider.value; // Display the default slider value
+    var yearDisplay = document.getElementById("yearDisplay");
+    var popDisplay = document.getElementById("popDisplay");
+
+    // display the default slider (year) value alongside population
+    yearDisplay.innerHTML = "Albuquerque in " + slider.value;
+    popDisplay.innerHTML = "Population: " + abqPopulation[slider.value];
 
     var imageUrl = `../media/ABQ_${slider.value}_GE.jpg`;
     var imageBounds = [
@@ -36,14 +50,15 @@ window.onload = function () {
     var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
     //map.fitBounds(imageBounds);
 
-
-
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
-        output.innerHTML = "Albuquerque in " + this.value;
+        // change map background image
         var imageUrl = `../media/ABQ_${this.value}_GE.jpg`;
         var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
-        console.log(imageUrl)
+
+        // change year and population display
+        yearDisplay.innerHTML = "Albuquerque in " + this.value;
+        popDisplay.innerHTML = "Population: " + abqPopulation[this.value];
     }
 
     // add scale bar to map
@@ -57,13 +72,4 @@ window.onload = function () {
         exportOnly: true,
         hideControlContainer: true
     }).addTo(map);
-
-    // add lat/lon printouts in console, for debugging
-    /*
-  console.log("map loaded")
-  console.log(map.getBounds());
-  map.on('moveend', function () {
-    console.log(map.getBounds());
-  });
-  */
 };
