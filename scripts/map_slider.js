@@ -5,7 +5,7 @@ window.onload = function () {
     var map = L.map("map_slider_container", {
         center: [39.73, -104.99], //[35.08770657898809, -106.65591268675824]
         zoom: 11,
-    }).setView([35.08770657898809, -106.65591268675824], 11);
+    }).setView([35.08770657898809, -106.65591268675824], 11); // 35.0877696809, -106.655960083
 
     // define basemap here
     var basemapAttribution =
@@ -32,6 +32,7 @@ window.onload = function () {
             [34.94842790637081, -106.9841766357422]
         ];
     var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+    //map.fitBounds(imageBounds);
 
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
