@@ -2,6 +2,7 @@
 
 window.onload = function () {
   // POINTS AND POLYGONS
+
   // city limits data
   var styleCityLimits = {
     fillOpacity: 0,
@@ -13,6 +14,32 @@ window.onload = function () {
   var cityLimits = L.geoJSON(citylimits, {
     //onEachFeature: cityLimitsPopups,
     style: styleCityLimits,
+  });
+
+  // apd police beats data
+  var styleApdBeats = {
+    fillOpacity: 0,
+    weight: 1,
+    opacity: 1,
+    color: "#000000",
+  };
+  
+  var apdBeats = L.geoJSON(apdbeats, {
+    //onEachFeature: apdBeatsPopups,
+    style: styleApdBeats,
+  });
+
+  // police incidents data
+  var stylePoliceIncidents = {
+    fillOpacity: 0,
+    weight: 1,
+    opacity: 1,
+    color: "#000000",
+  };
+  
+  var policeIncidents = L.geoJSON(policeincidents, {
+    //onEachFeature: policeIncidentsPopups,
+    style: stylePoliceIncidents,
   });
 
   // bike trail data
@@ -95,6 +122,8 @@ window.onload = function () {
   var overlayMaps = {
     "Places": placesLayer,
     "City Limits": cityLimits,
+    "APD Beats": apdBeats,
+    "Police Incidents": policeIncidents,
     "Bike Trails": bikeTrails,
     "Parks": cityParks,
     "Open Spaces": openSpaces,
