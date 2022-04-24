@@ -25,20 +25,40 @@ window.onload = function () {
     // begin slider logic here
     // this array is for the census population data
     var abqPopulation = {
-        "1990": 386988,
-        "2000": 448607,
-        "2010": 545852,
-        "2020": 564559
+        "1990": "386,988",
+        "2000": "448,607",
+        "2010": "545,852",
+        "2020": "564,559"
+    }
+
+    // this array is for the New Mexico MHI data
+    var nmMHI = {
+        "1990": "$40,230",
+        "2000": "$43,949",
+        "2010": "$42,186",
+        "2020": "$51,243"
+    }
+
+    // this array is for the New Mexico MHI data
+    var rioDischarge = {
+        "1990": "1981-1990: 1,145.04",
+        "2000": "1991-2000: 1,110.1",
+        "2010": "2001-2010: 885.65",
+        "2020": "2011-2020: 608.49"
     }
 
     // access slider and two <p> tags that change with the slider
     var slider = document.getElementById("backgroundImageSlider");
     var yearDisplay = document.getElementById("yearDisplay");
     var popDisplay = document.getElementById("popDisplay");
+    var mhiDisplay = document.getElementById("mhiDisplay");
+    var dischargeDisplay = document.getElementById("dischargeDisplay");
 
     // display the default slider (year) value alongside population
     yearDisplay.innerHTML = "Albuquerque in " + slider.value;
     popDisplay.innerHTML = "Population: " + abqPopulation[slider.value];
+    mhiDisplay.innerHTML = "New Mexico Median Household Income: " + nmMHI[slider.value];
+    dischargeDisplay.innerHTML = "Rio Grande Average Decadal Discharge in cubic feet per second " + rioDischarge[slider.value];
 
     var imageUrl = `../media/ABQ_${slider.value}_GE.jpg`;
     var imageBounds = [
@@ -59,6 +79,8 @@ window.onload = function () {
         // change year and population display
         yearDisplay.innerHTML = "Albuquerque in " + this.value;
         popDisplay.innerHTML = "Population: " + abqPopulation[this.value];
+        mhiDisplay.innerHTML = "New Mexico Median Household Income: " + nmMHI[this.value];
+        dischargeDisplay.innerHTML = "Rio Grande Average Decadal Discharge in cubic feet per second " + rioDischarge[this.value];
     }
 
     // add scale bar to map
