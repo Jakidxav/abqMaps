@@ -1,5 +1,25 @@
 "use strict"; // JS strict mode
 
+//Maybe we can use this to fix the symbols on the "Places" layer?
+//Define point to circle function
+function pointToCircle(feature, latlng) {
+
+  var geojsonMarkerOptions = {
+    radius: 1,
+    fillColor: "#a10000",
+    color: "red",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+  };
+
+  var circleMarker = L.circleMarker(latlng, geojsonMarkerOptions);
+
+  return circleMarker;
+}
+
+
+
 window.onload = function () {
   // POINTS AND POLYGONS
 
@@ -34,11 +54,12 @@ window.onload = function () {
     fillOpacity: 0,
     weight: 1,
     opacity: 1,
-    color: "#000000",
+    color: "#a10000",
   };
   
   var policeIncidents = L.geoJSON(policeincidents, {
     //onEachFeature: policeIncidentsPopups,
+    pointToLayer: pointToCircle,
     style: stylePoliceIncidents,
   });
 
