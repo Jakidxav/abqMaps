@@ -40,25 +40,47 @@ window.onload = function () {
     }
 
     // this array is for the New Mexico MHI data
-    var rioDischarge = {
-        "1990": "1981-1990: 1,145.04",
-        "2000": "1991-2000: 1,110.1",
-        "2010": "2001-2010: 885.65",
-        "2020": "2011-2020: 608.49"
+    var rioDischargeDates = {
+        "1990": "1981-1990",
+        "2000": "1991-2000",
+        "2010": "2001-2010",
+        "2020": "2011-2020"
     }
 
-    // access slider and two <p> tags that change with the slider
+    var rioDischargeValues = {
+        "1990": "1,145.04",
+        "2000": "1,110.1",
+        "2010": "885.65",
+        "2020": "608.49"
+    }
+
+    // access slider and two table <td> tags that change with the slider
     var slider = document.getElementById("backgroundImageSlider");
+    // year
     var yearDisplay = document.getElementById("yearDisplay");
+    var yearDisplayValue = document.getElementById("yearDisplayValue");
+    // population
     var popDisplay = document.getElementById("popDisplay");
+    var popDisplayValue = document.getElementById("popDisplayValue");
+    // median household income
     var mhiDisplay = document.getElementById("mhiDisplay");
+    var mhiDisplayValue = document.getElementById("mhiDisplayValue");
+    // rio grand discharge data
     var dischargeDisplay = document.getElementById("dischargeDisplay");
+    var dischargeDisplayValue = document.getElementById("dischargeDisplayValue");
 
     // display the default slider (year) value alongside population
-    yearDisplay.innerHTML = "Albuquerque in " + slider.value;
-    popDisplay.innerHTML = "Population: " + abqPopulation[slider.value];
-    mhiDisplay.innerHTML = "New Mexico Median Household Income: " + nmMHI[slider.value];
-    dischargeDisplay.innerHTML = "Rio Grande Average Decadal Discharge in cubic feet per second " + rioDischarge[slider.value];
+    yearDisplay.innerHTML = "Year";
+    yearDisplayValue.innerHTML = "<b>" + slider.value + "</b>";
+
+    popDisplay.innerHTML = "Population"
+    popDisplayValue.innerHTML = "<b>" + abqPopulation[slider.value]  + "</b>";
+
+    mhiDisplay.innerHTML = "New Mexico Median Household Income";
+    mhiDisplayValue.innerHTML = "<b>" + nmMHI[slider.value]  + "</b>";
+
+    dischargeDisplay.innerHTML = "Rio Grande Average Discharge (" +rioDischargeDates[slider.value] + ")";
+    dischargeDisplayValue.innerHTML = "<b>" + rioDischargeValues[slider.value] + " ft<sup>3</sup>/s </b>";
 
     var imageUrl = `../media/ABQ_${slider.value}_GE.jpg`;
     var imageBounds = [
@@ -68,23 +90,27 @@ window.onload = function () {
             // [34.94842790637081, -106.9841766357422]
         ];
     var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
-    //map.fitBounds(imageBounds);
 
     // Update the current slider value (each time you drag the slider handle)
+    // Note: right now, you have to change the value of BOTH dischargeDisplay and dischargeDisplayValue
     slider.oninput = function () {
         // change map background image
         var imageUrl = `../media/ABQ_${this.value}_GE.jpg`;
         var imgOverlay = L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
-        // change year and population display
-        yearDisplay.innerHTML = "Albuquerque in " + this.value;
-        popDisplay.innerHTML = "Population: " + abqPopulation[this.value];
-        mhiDisplay.innerHTML = "New Mexico Median Household Income: " + nmMHI[this.value];
-        dischargeDisplay.innerHTML = "Rio Grande Average Decadal Discharge in cubic feet per second " + rioDischarge[this.value];
+        // change table elements display
+        yearDisplayValue.innerHTML = "<b>" + this.value  + "</b>";
+        popDisplayValue.innerHTML = "<b>" + abqPopulation[this.value]  + "</b>";
+        mhiDisplayValue.innerHTML = "<b>" + nmMHI[this.value] + "</b>";
+        dischargeDisplay.innerHTML = "Rio Grande Average Discharge (" +rioDischargeDates[this.value] + ")";
+        dischargeDisplayValue.innerHTML = " <b>" + rioDischargeValues[this.value] + " ft<sup>3</sup>/s </b>";
     }
 
     // add scale bar to map
     L.control.scale().addTo(map);
+
+    // add ruler to map
+    L.control.ruler().addTo(map);
 
     // add printing function to map here using easyPrint plugin
     var printer = L.easyPrint({

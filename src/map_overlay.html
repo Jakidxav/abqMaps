@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/leaflet_1.7.1.css" />
     <link rel="stylesheet" href="../css/bootstrap_4.6.1.min.css" />
     <link rel="stylesheet" href="../css/stylesheet.css" />
+    <link rel="stylesheet" href="../css/leaflet_ruler.css" />
 
     <!-- scripts -->
     <script src="../scripts/jquery_3.5.1.slim.min.js"></script>
@@ -22,8 +23,18 @@
     <script src="../scripts/leaflet_1.7.1.js" ></script>
     <!-- Easy Print plugin for Leaflet: https://github.com/rowanwins/leaflet-easyPrint -->
     <script src="../scripts/easyPrint.js"></script>
+    <!-- ruler plugin for Leaflet: https://github.com/gokertanrisever/leaflet-ruler -->
+    <script src="../scripts/leafletRuler.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".toggle").click(function(){
+          $(".toggle-hide").toggle(speed="slow");
+        });
+      });
+      </script>
     <!-- personal map javascript file -->
     <script src="../scripts/map_overlay.js"></script>
+    
 
     <!-- data imports -->
     <script src="../data/abq_city_limits.js"></script>
@@ -56,18 +67,38 @@
 
     <div id="page_title" class="container">
       <div class="row">
-        <h2 class="col-sm-12">Albuquerque Map Maker - Overlays</h2>
-        <p id="subtitle" class="col-sm-12">
-          Visualizing useful data for social and environmental justice work in Albuquerque, New Mexico
+        <h3 class="col-sm-12">About this map</h3>
+        <p class="col-sm-12">This overlay map is meant to be a data aggregator for Albuquerque. So far, we have data relating to:</p>
+        <ul>
+          <li>X</li>
+          <li>Y</li>
+          <li>Z</li>
+        </ul>
+        <p class="col-sm-12">If you have more data that you would like to contribute to this map, please feel free to reach out! We plan
+          to add more data so that people can use this site to visualize and download relevant data in JSON format.
         </p>
-        <h3 class="col-sm-12">How to use this map</h3>
-        <p class="col-sm-12">This map is meant to be a data aggregator for Albuquerque.<br>
-          Click and drag in the map to pan your view. Use the "+" and "-" buttons to zoom the view in or out. <br>
-          To add data layers or change the basemap click on the layers icon in the upper right of the map, which opens a popup menu. <br>
-          On the popup menu you can select the layers you want to add to the map or use the radio buttons to change the basemap. <br>
-          Click the icon shaped like a downward arrow to download a .png file of the map you have created.</p>
+
+        <h3 class="col-sm-12 toggle">How to use this map</h3>
       </div>
-    </div>
+
+      <div class="row explainer-div toggle-hide">
+        <p class="col-sm-12">- Click and drag in the map to pan your view. Use the <b>+/-</b> buttons to zoom the view in or out.</p>
+
+        <p class="col-sm-12">
+          - To add data layers or change the basemap, click the <img src="../media/layers.svg"> icon in the upper right of the map to open the popup menu.
+          On the popup menu you can select the layers you want to add to the map or use the radio buttons to change the basemap.
+        </p>
+
+        <p class="col-sm-12">- Click the <img src="../media/icon.png"> icon to measure distances between places. This feature measures <b>total</b> distance,
+        so adding more than two points to the map will show you their combined distance. Please note: to end a current distance calculation, you will need to
+        double-click on the last point that you want measured. You can then start another distance caluclation on the same map or clear the map of all calculations
+        by again clicking the <img src="../media/icon.png"> icon</p>
+
+        <p class="col-sm-12">
+          - Click the <img src="../media/download.svg"> icon to download a .png file of the map you have created.
+          <b>Please note:</b> if you are using the <i>Police Incidents</i> point data, the download feature is currently slow to the
+          point of now working.</p>
+      </div>
 
     <div class="container">
       <div class="row">

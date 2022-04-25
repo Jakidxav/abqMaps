@@ -3,7 +3,6 @@
 //Maybe we can use this to fix the symbols on the "Places" layer?
 //Define point to circle function
 function pointToCircle(feature, latlng) {
-
   var geojsonMarkerOptions = {
     radius: 1,
     fillColor: "#a10000",
@@ -17,7 +16,6 @@ function pointToCircle(feature, latlng) {
 
   return circleMarker;
 }
-
 
 
 window.onload = function () {
@@ -199,6 +197,9 @@ window.onload = function () {
 
   // add scale bar to map
   L.control.scale().addTo(map);
+
+  // add ruler to map
+  L.control.ruler().addTo(map);
   
   // add printing function to map here using easyPrint plugin
   var printer = L.easyPrint({

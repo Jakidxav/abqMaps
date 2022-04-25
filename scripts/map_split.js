@@ -34,6 +34,9 @@ window.onload = function () {
     // add scale bar to map
     L.control.scale().addTo(map);
 
+    // add ruler to map
+    L.control.ruler().addTo(map);
+
     // add printing function to map here using easyPrint plugin
     var printer = L.easyPrint({
         tileLayer: streets,

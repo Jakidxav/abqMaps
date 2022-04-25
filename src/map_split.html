@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/leaflet_1.7.1.css" />
     <link rel="stylesheet" href="../css/bootstrap_4.6.1.min.css" />
     <link rel="stylesheet" href="../css/stylesheet.css" />
+    <link rel="stylesheet" href="../css/leaflet_ruler.css" />
 
     <!-- scripts -->
     <script src="../scripts/jquery_3.5.1.slim.min.js"></script>
@@ -24,6 +25,16 @@
     <script src="../scripts/easyPrint.js"></script>
     <!-- Splitmap plugin for Leaflet: https://github.com/QuantStack/leaflet-splitmap -->
     <script src="../scripts/leafletSplitMap.js"></script>
+    <!-- ruler plugin for Leaflet: https://github.com/gokertanrisever/leaflet-ruler -->
+    <script src="../scripts/leafletRuler.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        $(".toggle").click(function(){
+          $(".toggle-hide").toggle(speed="slow");
+        });
+      });
+      </script>
     <!-- personal map javascript file -->
     <script src="../scripts/map_split.js"></script>
     <script src="../scripts/imageComparison.js"></script>
@@ -57,19 +68,23 @@
 
     <div id="page_title" class="container">
       <div class="row">
-        <h2 class="col-sm-12">Albuquerque Map Maker - Split Map Sliders</h2>
-        <p id="subtitle" class="col-sm-12">
-          Visualizing useful data for social and environmental justice work in
-          Albuquerque, New Mexico
-        </p>
-        <h3 class="col-sm-12">How to use this map</h3>
+        <h3 class="col-sm-12">About this map</h3>
+        <p class="col-sm-12">This split map allows you to compare basemaps and satellite imagery.</p>
+        <h3 class="col-sm-12 toggle">How to use this map</h3>
+      </div>
+      <div class="row explainer-div toggle-hide">
         <p class="col-sm-12">
-          These maps allow you to compare two basemaps to each other. Use the slider located in the center of the map to switch from one basemap to the next.<br> 
-          Click and drag in the map to pan your view. Use the "+" and "-" buttons to zoom the view in or out. <br>
-          Click the icon shaped like a downward arrow to download a .png file of the map you have created.
-          <br><br><br>
-          This slider map compares a streets basemap with a satellite image basemap.
-        </p>
+          These maps allow you to compare two basemaps to each other. Use the slider located in the center of the map to switch from one basemap to the next.</p>
+          <p class="col-sm-12">- Click and drag in the map to pan your view. Use the <b>+/-</b> buttons to zoom the view in or out.</p>
+          
+          <p class="col-sm-12">- Click the <img src="../media/icon.png"> icon to measure distances between places. This feature measures <b>total</b> distance,
+            so adding more than two points to the map will show you their combined distance. Please note: to end a current distance calculation, you will need to
+            double-click on the last point that you want measured. You can then start another distance caluclation on the same map or clear the map of all calculations
+            by again clicking the <img src="../media/icon.png"> icon</p>
+
+            <p class="col-sm-12">- Click the <img src="../media/download.svg"> icon to download a .png file of the map you have created.</p>
+          
+          <p class="col-sm-12"></p>This slider map compares a streets basemap with a satellite image basemap.</p>
       </div>
     </div>
 
