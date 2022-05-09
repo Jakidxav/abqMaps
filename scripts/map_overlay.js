@@ -189,7 +189,7 @@ window.onload = function () {
   var baseMaps = {
     Streets: streets,
     Grayscale: grayscale,
-    Topography: usgs_topo,
+    Imagery: usgs_topo,
   };
 
   // combine basemaps and map overlays
