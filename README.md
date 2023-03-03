@@ -24,13 +24,10 @@ Here is a working list of our data sources:
 - Bike trails, parks, open spaces, trails, historic places, transit routes and stops <a href="https://github.com/ABQOpenData/ABQGeoJSON" target="_blank">[ABQGeoJSON]</a>
 - Neighborhoods, contours, land use, streets, and zoning <a href="https://www.cabq.gov/gis/geographic-information-systems-data" target="_blank">[City of Albuquerque GIS data]</a>
 - Water cover data from 2010 <a href="https://catalog.data.gov/dataset/2010-bernalillo-county-nm-current-area-hydrography" target="_blank">[data.gov]</a>
-- Tree canopy cover from 2016 <a href="https://www.nmconservation.org/field-notes/2018/11/8/seeing-the-city-for-the-trees-albuquerques-urban-forest" target="_blank">[The Nature Conservancy]</a>
 
 #### Data processing and conversion steps
-The heatmap and tree canopy GeoTIFF files (.tif) needed the extra pre-processing step of using GDAL's <a href="https://gdal.org/programs/gdal_polygonize.html" target="_blank">gdal_polygonize()</a> method in Python before exporting the shapefiles to GeoJSON using QGIS. Specifically, I used the method like this: <br><br>
-<code>
-gdal_polygonize.py -8 your_tifs_name.tif -f "ESRI Shapefile" output_name.shp
-</code>
+The heatmap GeoTIFF files (.tif) needed the extra pre-processing step of using GDAL's <a href="https://gdal.org/programs/gdal_polygonize.html" target="_blank">gdal_polygonize()</a> method in Python before exporting the shapefiles to GeoJSON using QGIS. Specifically, I used the method like this: <br><br>
+<code>gdal_polygonize.py -8 your_tifs_name.tif -f "ESRI Shapefile" output_name.shp</code>
 
 All shapefiles (.shp) and zipped Keyhole Markup Language files (.kmz) were converted to JSON format using QGIS with the help of <a href="https://gist.github.com/YKCzoli/b7f5ff0e0f641faba0f47fa5d16c4d8d" target="_blank">this</a> tutorial.
 
