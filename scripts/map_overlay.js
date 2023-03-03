@@ -123,19 +123,16 @@ window.onload = function () {
 
   //https://leafletjs.com/SlavaUkraini/examples/layers-control/
   // define point data here
-  var placesLayer = L.layerGroup();
   var biopark = L.marker([35.07960233987897, -106.6626523247024])
-    .bindPopup("BioPark")
-    .addTo(placesLayer);
+    .bindPopup("BioPark");
   var hospital = L.marker([35.089124664249965, -106.61840612465896])
-    .bindPopup("UNM Hospital")
-    .addTo(placesLayer);
+    .bindPopup("UNM Hospital");
   var sunport = L.marker([35.04764947336518, -106.6121846572487])
-    .bindPopup("Sunport")
-    .addTo(placesLayer);
+    .bindPopup("Sunport");
   var riogrande = L.marker([35.130659544765976, -106.6828237445549])
-    .bindPopup("Rio Grande Nature Center")
-    .addTo(placesLayer);
+    .bindPopup("Rio Grande Nature Center");
+  
+  var placesLayer = L.layerGroup([biopark, hospital, sunport, riogrande]);
 
   // add point and polygon data to aggregate layer
   var overlayMaps = {
