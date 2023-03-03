@@ -44,7 +44,9 @@ body {
 .img-comp-container {
   height: 500px; /*should be the same height as the images*/
   margin-bottom: 4%;
+  /*
   border: 2px solid yellow;
+  */
 }
 
 .img-comp-img {

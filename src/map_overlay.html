@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ABQMapMaker</title>
+    <title>abqMaps</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -45,6 +45,17 @@
     <script src="../data/historic_places.js"></script>
     <script src="../data/apd_beats.js"></script>
     <script src="../data/police_incidents.js"></script>
+    <!-- <script src="../data/land_use.js"></script> -->
+    <script src="../data/neighborhoods.js"></script>
+   <!-- <script src="../data/streets_data.js"></script> -->
+    <script src="../data/zip_codes.js"></script>
+    <script src="../data/transit_routes.js"></script>
+    <script src="../data/transit_stops.js"></script>
+    <script src="../data/water_cover.js"></script>
+    <script src="../data/landfill_data.js"></script>
+    <!-- <script src="../data/ido_zoning.js"></script> -->
+    <script src="../data/heatmap_afternoon.js"></script>
+    <script src="../data/heatmap_morning.js"></script>
   </head>
 
   <body>
@@ -68,18 +79,20 @@
     <div id="page_title" class="container">
       <div class="row">
         <h3 class="col-sm-12">About the Overlay Map</h3>
-        <p class="col-sm-12">The Overlay Map is meant to be a data visualizer and map maker for Albuquerque, NM. We have included data on a variety of subjects, including:</p>
-        <ul>
-          <li>Green Space and physical activites</li>
-          <li>Administrative Boundaries</li>
-          <li>Policing</li>
-          <li>Albuquerque History</li>
-        </ul>
-        <p class="col-sm-12">If you have more data that you would like to contribute to this map, please feel free to reach out! We plan
+        <p class="col-sm-12">
+          This overlay map is meant to be a data aggregator for Albuquerque, New Mexico and the surrounding region.
+          We hope that this site can serve as a communal resource for data, 
+          but also as a place where people can make maps and explore different datasets. We 
+          think that spatial questions are better answered when paired with a visual component.
+        </p>
+
+        <p class="col-sm-12">
+          Our goal is to host as many open-source datasets in JSON format as possible (converting from GeoTIFF, KMZ, SHP, etc).
+          If you have more data that you would like to contribute to this map, please feel free to reach out! We plan
           to add more data so that people can use this site to visualize and download relevant data in JSON format.
         </p>
 
-        <h3 class="col-sm-12 toggle">How to use the Overlay Map</h3>
+        <h3 class="col-sm-12 toggle">How to use the Overlay Map (toggle)</h3>
       </div>
 
       <div class="row explainer-div toggle-hide">
